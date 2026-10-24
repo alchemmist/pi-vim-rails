@@ -4186,7 +4186,7 @@ export default function (pi: ExtensionAPI) {
     const clipboardMirrorPolicy = resolveClipboardMirrorPolicy(
       piVimSettings.clipboardMirror,
     );
-    const inputRail = readPiVimInputRail(piVimSettings, undefined);
+    const inputRail = piVimSettings.inputRail;
     if (clipboardMirrorPolicy.warning && ctx.hasUI) {
       ctx.ui.notify(clipboardMirrorPolicy.warning, "warning");
     }
