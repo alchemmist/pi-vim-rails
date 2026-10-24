@@ -4127,7 +4127,7 @@ export class ModalEditor extends CustomEditor {
     } else {
       lines[last] = label;
     }
-    if (this.inputRail?.enabled) {
+    if (this.inputRail) {
       const rail = this.inputRail.colorize(this.inputRail.glyph);
       const contentWidth = Math.max(0, width - visibleWidth(this.inputRail.glyph));
       return lines.map((line) => `${rail}${truncateToWidth(line, contentWidth, "", true)}`);
