@@ -4129,14 +4129,15 @@ export class ModalEditor extends CustomEditor {
     }
     if (this.inputRail) {
       const rail = this.inputRail.colorize(this.inputRail.glyph);
-      const contentWidth = Math.max(0, width - visibleWidth(this.inputRail.glyph));
+      const railPadding = " ";
+      const contentWidth = Math.max(0, width - visibleWidth(this.inputRail.glyph) - railPadding.length);
       const rendered = lines.map((line) => {
         const plain = line.replace(/\x1b\[[0-9;]*m/g, "");
         const isHorizontalBorder = plain.includes("─") && plain.replace(/[─\s]/g, "") === "";
         const content = isHorizontalBorder
           ? " ".repeat(contentWidth)
           : truncateToWidth(line, contentWidth, "", true);
-        return `${rail}${content}`;
+        return `${rail}${railPadding}${content}`;
       });
       const isBlank = (line: string) => {
         const plain = line.replace(/\x1b\[[0-9;]*m/g, "");
@@ -4200,7 +4201,7 @@ export default function (pi: ExtensionAPI) {
     const clipboardMirrorPolicy = resolveClipboardMirrorPolicy(
       piVimSettings.clipboardMirror,
     );
-    const inputRail = piVimSettings.inputRail ?? { enabled: true, glyph: "▌", color: "customMessageLabel", hideModeLabel: true };
+    const inputRail = piVimSettings.inputRail ?? { enabled: true, glyph: "▏", color: "customMessageLabel", hideModeLabel: true };
     if (clipboardMirrorPolicy.warning && ctx.hasUI) {
       ctx.ui.notify(clipboardMirrorPolicy.warning, "warning");
     }
