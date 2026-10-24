@@ -4214,6 +4214,10 @@ export default function (pi: ExtensionAPI) {
     }
 
     const t = ctx.ui.theme;
+    let planActive = false;
+    pi.events.on("plan-mode-state", (payload) => {
+      planActive = typeof payload === "object" && payload !== null && (payload as { enabled?: unknown }).enabled === true;
+    });
     const modeColors = resolveModeColors(piVimSettings.modeColors);
     const reverseVideo = (s: string) => `\x1b[7m${s}\x1b[27m`;
     const { borderSync, labelSync } = resolveSurfaceSyncMaps(piVimSettings);
@@ -4243,7 +4247,7 @@ export default function (pi: ExtensionAPI) {
         inputRail: inputRail?.enabled
           ? {
               glyph: inputRail.glyph,
-              colorize: (s) => t.fg(inputRail.color, s),
+              colorize: (s) => t.fg(planActive ? "blue" : inputRail.color, s),
               hideModeLabel: inputRail.hideModeLabel,
             }
           : null,
