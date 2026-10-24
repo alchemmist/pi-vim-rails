@@ -290,6 +290,7 @@ function disk(cwd: string): PiVimSettings {
     globalExCommand: readPiVimGlobalExCommandSetting(g, p),
     modeColors: readPiVimModeColors(g, p),
     modeChange: readPiVimModeChange(g, p),
+    inputRail: readPiVimInputRail(g, p),
     borderSync: readPiVimBorderSync(g, p),
     labelSync: readPiVimLabelSync(g, p),
     syncBorderColorWithMode: readPiVimBorderSyncSetting(g, p),
