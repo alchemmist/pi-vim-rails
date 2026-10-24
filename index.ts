@@ -4186,7 +4186,7 @@ export default function (pi: ExtensionAPI) {
     const clipboardMirrorPolicy = resolveClipboardMirrorPolicy(
       piVimSettings.clipboardMirror,
     );
-    const inputRail = piVimSettings.inputRail;
+    const inputRail = piVimSettings.inputRail ?? { enabled: true, glyph: "▌", color: "customMessageLabel", hideModeLabel: true };
     if (clipboardMirrorPolicy.warning && ctx.hasUI) {
       ctx.ui.notify(clipboardMirrorPolicy.warning, "warning");
     }
