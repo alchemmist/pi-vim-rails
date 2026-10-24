@@ -4130,7 +4130,7 @@ export class ModalEditor extends CustomEditor {
     if (this.inputRail) {
       const rail = this.inputRail.colorize(this.inputRail.glyph);
       const contentWidth = Math.max(0, width - visibleWidth(this.inputRail.glyph));
-      return lines.map((line) => {
+      const rendered = lines.map((line) => {
         const plain = line.replace(/\x1b\[[0-9;]*m/g, "");
         const isHorizontalBorder = plain.includes("─") && plain.replace(/[─\s]/g, "") === "";
         const content = isHorizontalBorder
@@ -4138,6 +4138,13 @@ export class ModalEditor extends CustomEditor {
           : truncateToWidth(line, contentWidth, "", true);
         return `${rail}${content}`;
       });
+      const isBlank = (line: string) => {
+        const plain = line.replace(/\x1b\[[0-9;]*m/g, "");
+        return plain.slice(this.inputRail!.glyph.length).trim() === "";
+      };
+      while (rendered.length > 1 && isBlank(rendered[0]!)) rendered.shift();
+      while (rendered.length > 1 && isBlank(rendered[rendered.length - 1]!)) rendered.pop();
+      return rendered;
     }
     return lines;
   }
