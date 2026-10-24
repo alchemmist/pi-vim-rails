@@ -4247,7 +4247,7 @@ export default function (pi: ExtensionAPI) {
         inputRail: inputRail?.enabled
           ? {
               glyph: inputRail.glyph,
-              colorize: (s) => t.fg(planActive ? "blue" : inputRail.color, s),
+              colorize: (s) => t.fg(planActive ? "mdLink" : inputRail.color, s),
               hideModeLabel: inputRail.hideModeLabel,
             }
           : null,
